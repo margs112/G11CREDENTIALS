@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SENTRO PARTYLIST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('red2.jpg') no-repeat center center / cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .fire-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .fire-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      animation: fire-flicker 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes fire-flicker {
+      0% { transform: scale(1.02) translateY(-1px); opacity: 0.2; }
+      100% { transform: scale(1.05) translateY(1px); opacity: 0.3; }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      max-width: 760px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: dropIn 1s ease-out;
+    }
+
+    .logo img {
+      width: 100%;
+      border-radius: 50%;
+    }
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .text-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+.text-box.collapsed:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+    .text-box:hover {
+      transform: scale(1.03);
+    }
+
+    .text-box h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #8B0000;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .text-box.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .collapse-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+      padding-top: 0;
+      opacity: 0;
+    }
+
+    .collapse-content.active {
+  max-height: 500px; /* you can adjust this */
+  overflow-y: auto;
+  padding-top: 1rem;
+  opacity: 1;
+  scrollbar-width: thin;
+}
+
+
+
+
+    .collapse-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .collapse-inner img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+    @media (max-width: 768px) {
+      .top {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .collapse-inner img {
+        max-height: 200px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes dropIn {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="fire-overlay">
+    <img src="https://media.tenor.com/3Dv1dt0VcxUAAAAM/fire.gif" alt="Fire" />
+  </div>
+
+  <div class="wrapper">
+    <div class="top">
+      <div class="logo">
+        <img src="sentro.png" alt="Logo">
+      </div>
+    </div>
+
+    <div class="accordion">
+
+      <!-- Sample Text Box -->
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Cabardo, Catherine Margareth I.
+          <span class="toggle-icon">+</span>
+        </h1>
+        <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+  <h2>LEADERSHIP CREDENTIALS:</h2>
+  <ul>
+    <li>Rosario Youth Municipal Vice Mayor 2024</li>
+    <li>Pupil Activity Council 2018-2019 Treasurer</li>
+    <li>Pupil Activity Council 2019-2020 Treasurer</li>
+    <li>Pupil Activity Council 2020-2021 President</li>
+    <li>Student Activity Council 2023-2024 Treasurer</li>
+    <li>Student Activity Council 2024-2025 Public Information Officer</li>
+    <li>Grade 1 Class President</li>
+    <li>Grade 2 Class President</li>
+    <li>Grade 3 Class President</li>
+    <li>Grade 7 Class President</li>
+    <li>Grade 8 Class President</li>
+    <li>ICT Club 2019 Public Information Officer</li>
+    <li>Araling Panlipunan Club Grade 10 Representative</li>
+    <li>Barangay Youth Council Treasurer</li>
+    <li>Former Maks n Mars Choir Treasurer</li>
+  </ul>
+
+  <h2>ACADEMIC CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 1 - With High Honors (Rank 1)</li>
+    <li>MTAP Division Elimination Round 2nd Placer</li>
+    <li>Scholastic Star Reader</li>
+    <li>Grade 2 - With High Honors (Rank 1)</li>
+    <li>Spelling Contest District Level 2nd Placer</li>
+    <li>MTAP Division Elimination Round Participant</li>
+    <li>Grade 3 - With High Honors (Rank 1)</li>
+    <li>MTAP Division Elimination Round 1st Placer</li>
+    <li>MTAP Provincial Level Participant</li>
+    <li>OSJAA and District Level Chess Player</li>
+    <li>Grade 4 - With High Honors (Rank 1)</li>
+    <li>MTAP Division Elimination Round 1st Placer</li>
+    <li>Science Quiz Bee Participant</li>
+    <li>Number Sense Contest Contestant</li>
+    <li>Grade 5 - With High Honors (Rank 1)</li>
+    <li>Editorial Journalism District Level 2nd Placer</li>
+    <li>Editorial Journalism Division Level Participant</li>
+    <li>Grade 6 - Class Valedictorian</li>
+    <li>Outstanding in Religion</li>
+    <li>Special Recognition in English</li>
+    <li>Special Recognition in Mathematics</li>
+    <li>Special Recognition in Araling Panlipunan</li>
+    <li>Special Recognition in Science</li>
+    <li>Special Recognition in Filipino</li>
+    <li>TechFactorsinc Outstanding Performer in Filipino</li>
+    <li>TechFactorsinc Outstanding Performer in Computer</li>
+    <li>TechFactorsinc Outstanding Performer in Science</li>
+    <li>TechFactorsinc Outstanding Performer in Araling Panlipunan</li>
+    <li>TechFactorsinc Outstanding Performer in Mathematics</li>
+    <li>Grade 7 - With Highest Honors (Rank 1)</li>
+    <li>OUTSTANDING IT STUDENT</li>
+    <li>Outstanding in Religion</li>
+    <li>Grade 8 - With High Honors (Rank 1)</li>
+    <li>Quipper Top Performing Student</li>
+    <li>Quipper South Luzon: 1st QBee</li>
+    <li>Battle of the Brains Junior Highschool 4th Placer</li>
+    <li>Outstanding in Religion</li>
+    <li>Representative for PEAC Recertification</li>
+    <li>Grade 9 - With High Honors (Rank 1)</li>
+    <li>OSJACAA Oratorical Speaking Champion</li>
+    <li>Outstanding IT Student</li>
+    <li>Outstanding in Religion</li>
+    <li>Grade 10 - With High Honors (Rank 1)</li>
+    <li>Special Recognition in Specific Discipline – Mathematics</li>
+    <li>Special Recognition in Specific Discipline - English</li>
+    <li>Special Recognition in Specific Discipline - Araling Panlipunan</li>
+    <li>Outstanding in Religion</li>
+    <li>Outstanding in ICT</li>
+    <li>KOOPQUIZ 13TH BLAST 2ND PLACER</li>
+    <li>DisSPC Radio Broad Casting - English 1st Placer</li>
+    <li>DivSPC Radio Broad Casting - English 3rd Best Group</li>
+    <li>DivSPC Radio Broad Casting - English 3rd Best Infomercial</li>
+    <li>DivSPC Radio Broad Casting - English 4th Best Script January 2025</li>
+    <li>Festival of Talents Pecha Kucha 2nd Placer</li>
+    <li>National ACP Military Drills and Technical Skills Competition - Jigsaw 2nd Placer</li>
+    <li>16th OSJACAPHIA Military Drills and Tactical Skills Competition - Compass 3rd Place</li>
+  </ul>
+
+  <h2>ORGANIZATIONS:</h2>
+  <ul>
+    <li>Pupil Activity Council (2018-2021)</li>
+    <li>Student Activity Council (2023-2025)</li>
+    <li>Campus Journalism (2018-2020)</li>
+    <li>Araling Panlipunan Club (2024-2025)</li>
+    <li>Student Catechist (2024-2025)</li>
+    <li>Marello's and Marelletes Altar Knights (since 2019)</li>
+    <li>Tinig ni San Jose Service Award (2023-2025)</li>
+    <li>Barangay Youth Council (since 2024)</li>
+    <li>Parish Choir</li>
+    <li>Joseph Marello Youth</li>
+  </ul>
+</div>
+
+</div>
+
+        </div>
+      </div>
+
+      <!-- Repeat for other candidates -->
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Carpio, Calvin C.
+          <span class="toggle-icon">+</span>
+        </h1>
+<div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+  <div class="scrollable-content">
+  <h2>LEADERSHIP CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 5 Class Secretary</li>
+    <li>Grade 8 Class President</li>
+    <li>Altar Servers Club President</li>
+    <li>Supreme Student Government Grade 7 Representative</li>
+    <li>Supreme Student Government Public Information Officer (S.Y. ‘22-‘23)</li>
+    <li>Supreme Student Government Public Information Officer (S.Y. ‘23-‘24)</li>
+    <li>Supreme Student Government Grade 10 Chairperson</li>
+    <li>Supreme Student Government Awardee (S.Y. ‘21-‘22)</li>
+    <li>Outgoing Grade 10 Chairperson of the Supreme Student Government Awardee (S.Y. ‘24-‘25)</li>
+    <li>Junior High School Organization Representative</li>
+    <li>SNS Committee Member (S.Y. ‘23-‘24)</li>
+    <li>PubMat Committee Member (S.Y. ‘24-‘25)</li>
+    <li>USAL Cup Media Team AdHoc Committee Member</li>
+    <li>Tuklong ni San Vicente Ferrer - Parroquia de la Ciudad de Sto. Tomas de Aquino Barangay Youth Council Choir Representative</li>
+  </ul>
+&nbsp
+  <h2>ACADEMIC CREDENTIALS:</h2>
+  <ul>
+    <li>Kindergarten 2 Overall Top Achiever</li>
+    <li>Grade 1 With Honors</li>
+    <li>Grade 3 With Honors</li>
+    <li>Grade 4 With Honors</li>
+    <li>Grade 5 With Honors</li>
+    <li>Grade 6 With Honors</li>
+    <li>Grade 8 With Honors</li>
+    <li>Grade 9 With Honors</li>
+    <li>Grade 10 With Honors</li>
+    <li>Parish Service Awardee (S.Y. ‘19-‘20)</li>
+    <li>MathScore Bronze Medalist (Rank 5)</li>
+    <li>MathScore Awardee (S.Y. ‘22-‘23)</li>
+    <li>Math Quiz Bee Participant (S.Y. ‘22-‘23)</li>
+    <li>Math Quiz Bee Participant (S.Y. ‘21-‘22)</li>
+  </ul>
+&nbsp
+  <h2>EXTRA-CURRICULAR ACTIVITIES:</h2>
+  <ul>
+    <li>Grade 8 Intramurals Basketball Champion (S.Y. ‘22-‘23)</li>
+    <li>Grade 9 Intramurals Basketball Champion (S.Y. ‘23-‘24)</li>
+    <li>Actor in “Tulad Niya” – a short film honoring the 750th Death Anniversary of St. Thomas Aquinas</li>
+  </ul>
+&nbsp
+  <h2>ORGANIZATIONS:</h2>
+  <ul>
+    <li>Math Club (S.Y. ‘17-‘18)</li>
+    <li>Young Cherubim Choir (S.Y. ‘18-‘19)</li>
+    <li>Young Homemakers Club (S.Y. ‘19-‘20)</li>
+    <li>Altar Servers Club (S.Y. ‘19-‘20)</li>
+    <li>Supreme Student Government (S.Y. ‘21-‘22)</li>
+    <li>Supreme Student Government (S.Y. ‘22-‘23)</li>
+    <li>Supreme Student Government (S.Y. ‘23-‘24)</li>
+    <li>Supreme Student Government (S.Y. ‘24-‘25)</li>
+  </ul>
+</div>
+</div>
+      </div>
+      </div>
+
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Endozo, Yvonne Crismarie F.
+          <span class="toggle-icon">+</span>
+        </h1>
+        <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+<h2>LEADERSHIP CREDENTIALS:</h2>
+<ul>
+  <li>GSP - Girls Scout of the Philippines (2015 - 2016)</li>
+  <li>GSP - Girls Scout of the Philippines (2016 - 2017)</li>
+  <li>GSP - Girls Scout of the Philippines (2017 - 2018)</li>
+  <li>GSP - Girls Scout of the Philippines: Assistant Leader  (2019 - 2020)</li>
+  <li>Grade 3 Class Secretary (2017 - 2018)</li>
+  <li>Grade 3 Supreme Pupil Government Councilor (2017 - 2018)</li>
+  <li>Grade 4 Class Secretary (2018 - 2019)</li>
+  <li>Supreme Pupil Government Candidate (2018 -2019)</li>
+  <li>Grade 5 Class Auditor (2019 - 2020)</li>
+  <li>Supreme Pupil Government Candidate (2019 - 2020)</li>
+  <li>YES-O - Youth for Environment in Schools Organization Auditor (2019 - 2020)</li>
+  <li>Leadership Training Attendee  (2022 - 2023)</li>
+  <li>Grade 8 Class Vice President (2022 - 2023)</li>
+  <li>Grade 8 CAPSTONE Co-Leader (2022 - 2023)</li>
+  <li>Grade 9 Class President (2023 - 2024)</li>
+  <li>Grade 9 CAPSTONE Leader (2023 - 2024)</li>
+  <li>Leadership Awardee (2024)</li>
+  <li>Grade 10 Class Vice President (2024 - 2025)</li>
+  <li>Grade 10 CAPSTONE Co-Leader (2024 - 2025)</li>
+</ul>
+
+<h2>ACADEMIC CREDENTIALS:</h2>
+<ul>
+  <li>Daycare - Achiever</li>
+  <li>Kindergarten - Achiever</li>
+  <li>Grade 1 - Achiever</li>
+  <li>Grade 2 - With Honors, Top 10</li>
+  <li>Grade 3 - With Honors</li>
+  <li>Grade 4 - With Honors</li>
+  <li>Grade 5 - With Honors</li>
+  <li>Grade 6 - With Honors</li>
+  <li>Grade 7 - With Honors</li>
+  <li>Grade 8 - With Highest Honors</li>
+  <li>Grade 9 - With Highest Honors</li>
+  <li>Grade 10 - With High Honors</li>
+  <li>Radio Broadcasting Division Schools Press Conference Qualifier, English Category (2019 - 2020)</li>
+  <li>AMEP Qualifying Exam Participant (2018 - 2019)</li>
+  <li>AMEP Qualifying Exam Participant (2019 - 2020)</li>
+  <li>MTAP Qualifier (2016 - 2017)</li>
+  <li>MTAP Qualifier (2017 - 2018)</li>
+  <li>MTAP Qualifier, Awardee (2018 - 2019)</li>
+  <li>MTAP Qualifier, Awardee (2019 - 2020)</li>
+  <li>Poster Making Contest Participant (2020 - 2021)</li>
+  <li>Singapore and Asian Schools Math Olympiad, Participant (2022 - 2023)</li>
+</ul>
+
+<h2>ORGANIZATIONS:</h2>
+<ul>
+  <li>Supreme Pupil Government (2017 - 2018)</li>
+  <li>Campus Choir (2018 - 2019)</li>
+  <li>Youth for Environment in Schools Organization (2019 - 2020)</li>
+  <li>SINAG Club (2019 - 2020)</li>
+  <li>Dance Club (2022 - 2024)</li>
+  <li>Volleyball Club (2019 - 2020)</li>
+  <li>Volleyball Club (2023 - 2024)</li>
+  <li>Journalism (2019 - 2020)</li>
+  <li>De La Salle Lipa Student Campus Ministry - Campus Ministry Choir (2024 - Present)</li>
+  <li>Cathedral Youth Choir - Senior Core (2025 - Present)</li>
+  <li>Divino Amor Angelicum Choir (2025  - Present)</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Labong, Jay-Jay I.
+          <span class="toggle-icon">+</span>
+        </h1>
+                <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+  <h2>LEADERSHIP CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 1 Class President</li>
+    <li>Grade 2 Class President</li>
+    <li>Grade 3 Class President</li>
+    <li>Grade 4 Class President</li>
+    <li>Grade 5 Class Vice President</li>
+    <li>Grade 6 Class President</li>
+    <li>Grade 7 Class President</li>
+    <li>Grade 8 Class Vice President</li>
+    <li>Grade 9 Class Vice President</li>
+    <li>Grade 10 Class Peace Information Officer (PIO)</li>
+    <li>2020 Supreme Pupil Government (SPG) Vice President</li>
+    <li>2021 Supreme Pupil Government (SPG) Vice President</li>
+    <li>2022 Youth for Environment in Schools Organization (YES-O) Officer</li>
+    <li>2023 Mathematics Club President</li>
+    <li>2024 Mathematics Club President</li>
+    <li>2024 Batangas Eastern Colleges Linggo ng Kabataan School Representative</li>
+    <li>2024 Linggo ng Kabataan Little Municipal Officials, Little Vice Mayor and Presiding Officer</li>
+    <li>2024 School-based Boy Scouts of The Philippines (BSP) Leader</li>
+    <li>2024 Face of the Batangas Eastern Colleges</li>
+    <li>2024 San Juan, Batangas Community News Journalism Volunteer</li>
+    <li>2025 School-based Leadership Training Program Champion</li>
+    <li>Batangas Eastern Colleges Junior High School Department Model Young Leader in Governance Award Recipient</li>
+  </ul>
+
+  <h2>ACADEMIC CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 1 - With Honors, Top 1</li>
+    <li>Grade 2 - With Honors, Top 1</li>
+    <li>Grade 3 - With High Honors, Top 1</li>
+    <li>Grade 4 - With High Honors, Top 1</li>
+    <li>Grade 5 - With High Honors, Top 1</li>
+    <li>Grade 6 - With Honors, Top 1</li>
+    <li>Grade 7 - With High Honors, Top 1</li>
+    <li>Grade 8 - With Honors, Top 1</li>
+    <li>Grade 9 - With High Honors, Top 1</li>
+    <li>Grade 10 - With High Honors, Top 1</li>
+    <li>2016 MTAP Math Challenge District Level, Champion</li>
+    <li>2016 MTAP Math Challenge Division Level, Qualifier</li>
+    <li>2017 MTAP Math Challenge District Level, Champion</li>
+    <li>2017 MTAP Math Challenge Division Level, Qualifier</li>
+    <li>2018 MTAP Math Challenge District Level, Champion</li>
+    <li>2018 MTAP Math Challenge Division Level, Qualifier</li>
+    <li>2019 MTAP Math Challenge District Level, Champion</li>
+    <li>2019 MTAP Math Challenge Division Level, Qualifier</li>
+    <li>2019 Asia MathSci League, Inc. (AMSLI) Mathematics Enhancement Program (AMEP) Division-wide Qualifier</li>
+    <li>2019 Asia MathSci League, Inc. (AMSLI) Philippines, San Juan, Batangas, Representative</li>
+    <li>2019 Asia MathSci League, Inc. (AMSLI) Philippines, Math League, 4th placer</li>
+    <li>2017 Palahanan II Elementary School Publication Staff Writer</li>
+    <li>2018 Palahanan II Elementary School Publication Staff Writer</li>
+    <li>2018 Municipal Spelling Bee Competition, Champion</li>
+    <li>2018 Division Spelling Bee Competition, Qualifier</li>
+    <li>2019 Municipal Journalism Summer Camp News Writing, Bronze Medalist</li>
+    <li>2019 Municipal Journalism Summer Camp Feature Writing, Gold Medalist</li>
+    <li>2019 Municipal Journalism Summer Camp Editorial Writing, Gold Medalist</li>
+    <li>2019 Palahanan II Elementary School Publication Staff Writer</li>
+    <li>2019 District Schools Press Conference News Writing, Silver Medalist</li>
+    <li>2019 Division Schools Press Conference News Writing, Qualifier</li>
+    <li>2021 School-based Spelling Bee Competition, Champion</li>
+    <li>2022 The Pioneer, High School Publication Staff Writer</li>
+    <li>2022 District Schools Press Conference News Writing, Silver Medalist</li>
+    <li>2022 Division Schools Press Conference News Writing Qualifier</li>
+    <li>2023 The Pioneer, High School Publication News Section Editor</li>
+    <li>2023 District Schools Press Conference News Writing, Gold Medalist</li>
+    <li>2023 Division Schools Press Conference News Writing, Qualifier</li>
+    <li>2024 The Pioneer, High School Publication Managing Editor and News Section Editor</li>
+    <li>2024 District Schools Press Conference News Writing, Gold Medalist</li>
+    <li>2024 Division Schools Press Conference News Writing, Qualifier</li>
+    <li>2024 Municipal Level KoopQuiz 13th Blast, 1st Runner-up</li>
+    <li>Batangas Eastern Colleges Academic Scholarship Recipient</li>
+    <li>Batangas Eastern Colleges Junior High School Department Advanced Curriculum Qualifier</li>
+    <li>Batangas Eastern Colleges Junior High School Department Advanced Curriculum Top Performing Student</li>
+    <li>Batangas Eastern Colleges Junior High School Department Most Responsible Campus Journalist</li>
+    <li>Batangas Eastern Colleges Junior High School Department Young Einstein Award Recipient</li>
+    <li>Batangas Eastern Colleges Junior High School Department Modern Al-khwarizmi Award Recipient</li>
+    <li>De La Salle Lipa St. Benildus Romancon FSC, Academic Scholarship Recipient</li>
+  </ul>
+
+  <h2>ORGANIZATIONS</h2>
+  <ul>
+    <li>Palahanan II Elementary School Publication, S.Y. 2017-2018</li>
+    <li>Palahanan II Elementary School Publication, S.Y. 2018-2019</li>
+    <li>Supreme Pupil Government (SPG), S.Y. 2019-2020</li>
+    <li>Youth for Environment in Schools Organization (YES-O), S.Y. 2022-2023</li>
+    <li>Mathematics Club, S.Y. 2023-2024</li>
+    <li>Mathematics Club, S.Y. 2024-2025</li>
+    <li>The Pioneer, High School Publication, S.Y. 2022-2023</li>
+    <li>The Pioneer, High School Publication, S.Y. 2023-2024</li>
+    <li>The Pioneer, High School Publication, S.Y. 2024-2025</li>
+    <li>Marellos Altar Knights and Marelletes (Maks & Mars), 2023</li>
+    <li>Marellos Altar Knights and Marelletes (Maks & Mars), 2024</li>
+    <li>Marellos Altar Knights and Marelletes (Maks & Mars), Present</li>
+  </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Para, Princess Giannah Brielle M.
+          <span class="toggle-icon">+</span>
+        </h1>
+                <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+   <h2>LEADERSHIP CREDENTIALS:</h2>
+    <ul>
+      <li>Grade 4 Earth Marshal</li>
+      <li>Grade 5 Student Marshal</li>
+      <li>Grade 7 CAPSTONE Leader</li>
+      <li>Grade 8 CAPSTONE Leader</li>
+      <li>Grade 9 CAPSTONE Leader</li>
+      <li>Grade 9 Class President</li>
+      <li>Grade 10 CAPSTONE Leader</li>
+      <li>Grade 10 SCB Representative</li>
+      <li>LYMO, SIKAT Member (S.Y. ‘23–’24)</li>
+      <li>Bliss Brigade Club President (S.Y. ‘23–‘24)</li>
+      <li>Outstanding Officer of the JHS SCB (S.Y. ‘24–’25)</li>
+    </ul>
+  &nbsp
+    <h2>ACADEMIC CREDENTIALS:</h2>
+    <ul>
+      <li>Nursery 1 First Honors</li>
+      <li>Nursery 2 First Honors</li>
+      <li>Kinder First Honors</li>
+      <li>Grade 1 First Honors</li>
+      <li>Grade 2 First Honors</li>
+      <li>Grade 3 With Honors</li>
+      <li>Grade 4 With Honors</li>
+      <li>Grade 5 With High Honors</li>
+      <li>Grade 6 With Highest Honors</li>
+      <li>Grade 7 With Highest Honors</li>
+      <li>Grade 8 With Highest Honors</li>
+      <li>Grade 9 With Highest Honors</li>
+      <li>Grade 10 With Highest Honors</li>
+      <li>Participant, SASMO (SY ‘23–’24)</li>
+      <li>Participant, SASMO (SY ‘24–’25)</li>
+      <li>KUMON International Standard (KIS) Level in Reading (2014)</li>
+      <li>KUMON Advanced Student Roll (ASHR) Bronze Awardee (2014)</li>
+    </ul>
+&nbsp
+    <h2>ORGANIZATIONS:</h2>
+    <ul>
+      <li>Dance Club (S.Y. ‘17–’18)</li>
+      <li>Dance Club (S.Y. ‘18–’19)</li>
+      <li>Volleyball Club (S.Y. ‘19–’20)</li>
+      <li>Volleyball Varsity (S.Y. ‘20–’21)</li>
+      <li>Lasallian Youth Ministry Office - Si Kristo at Tayo (S.Y. ‘23–’24)</li>
+      <li>Bliss Brigade Club (S.Y. ‘23–’24)</li>
+      <li>Student Campus Ministry - Lector (S.Y. ‘24–‘25)</li>
+      <li>Student Campus Ministry - Lector (S.Y. ‘25–‘26)</li>
+      <li>Student Coordinating Board (S.Y. ‘24–’25)</li>
+    </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Pastolero, Luis Gabriel F.
+          <span class="toggle-icon">+</span>
+        </h1>
+               <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+  <h2>LEADERSHIP CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 3 Councilor, Supreme Pupil Government</li>
+    <li>Grade 4 Councilor, Supreme Pupil Government</li>
+    <li>Vice President, Supreme Pupil Government</li>
+    <li>President, Supreme Pupil Government (Tanauan South Central School)</li>
+    <li>President, Division Federation of Supreme Pupil Government Officers (City Schools Division of Tanauan)</li>
+    <li>Board Member, Regional Federation of Supreme Pupil Government Officers (R4A CALABARZON)</li>
+    <li>Grade 7 CAPSTONE Leader</li>
+    <li>Grade 8 CAPSTONE Leader</li>
+    <li>Grade 9 CAPSTONE Leader</li>
+    <li>Grade 10 CAPSTONE Leader</li>
+    <li>Grade 1 Class Vice President</li>
+    <li>Grade 2 Class President</li>
+    <li>Grade 3 Class President</li>
+    <li>Grade 4 Class President</li>
+    <li>Grade 5 Class President</li>
+    <li>Grade 8 Class Marshal</li>
+    <li>Grade 9 Class President</li>
+    <li>Grade 10 Class President</li>
+    <li>BULIK Grade 9 Cluster Chief</li>
+    <li>BULIK Managing Editor</li>
+    <li>Delegate, Training on Research and Leadership for SSG/SPG and Advisers</li>
+    <li>Delegate, Teacher-Adviser Training Program cum Supreme Pupil Government and Supreme Student Government Leadership Training and Research Workshop cum Local Stake Convergence</li>
+    <li>Delegate, PAGSIBOL: Leaders’ Congress for SPG & SSG Officers SY 2020-2021</li>
+    <li>Delegate, National PDO, SG Officers, and Advisers Assembly</li>
+    <li>Delegate, OLCC (Online Learning Session on Climate Change) - SDO Tanauan</li>
+    <li>Delegate, Child’s Rights Orientation: United Nations Convention on the Rights of the Child (UNCRC) with Child Protection</li>
+    <li>Delegate, Region 4-A Handang Isip, Handa Bukas! Youth Forum</li>
+    <li>Delegate, DepEd’s Four Core Values as Foundation of Youth: Youth Engagement for Global Action</li>
+    <li>Delegate, KALAMBAG - Tanauan City Dialogue</li>
+    <li>Delegate, JCI Tanauan LauBini Leadership Colloquium (The Leader Within You)</li>
+  </ul>
+
+  <h2>ACADEMIC CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 1 Top 1</li>
+    <li>Grade 2 With High Honors, Rank 1</li>
+    <li>Grade 3 With High Honors, Rank 1</li>
+    <li>Grade 4 With High Honors, Rank 1</li>
+    <li>Grade 5 With High Honors, Rank 1</li>
+    <li>Grade 6 With High Honors, Rank 1</li>
+    <li>Grade 7 With Highest Honors</li>
+    <li>Grade 8 With Highest Honors, Rank 1</li>
+    <li>Grade 9 With Highest Honors, Rank 2</li>
+    <li>Grade 10 With Highest Honors, Rank 3</li>
+    <li>Br. Benildus Romancon FSC Scholarship Grantee</li>
+    <li>3rd Place, Metrobank-MTAP-DepEd Math Challenge Division Elimination (S.Y. ‘15 - ‘16)</li>
+    <li>3rd Place, Metrobank-MTAP-DepEd Math Challenge Division Elimination (S.Y. ‘16 - ‘17)</li>
+    <li>1st Place, District Science and Technology Fair and Congress Quiz Bee (S.Y. ‘17-‘18)</li>
+    <li>2nd Place, Division Science and Technology Fair Quiz Bee (S.Y. ‘17 - ‘18)</li>
+    <li>1st Place, Metrobank-MTAP-DepEd Math Challenge Division Elimination (S.Y. ‘17 - ‘18)</li>
+    <li>2nd Place, Metrobank-MTAP-DepEd Math Challenge Division Finals (S.Y. ‘17 - ‘18)</li>
+    <li>Top 5 Medalist, MTAP Summer Class - Tanauan City South District (S.Y. ‘18 - ‘19)</li>
+    <li>1st Place, Metrobank-MTAP-DepEd Math Challenge Division Elimination (S.Y. ‘18 - ‘19)</li>
+    <li>1st Place, Metrobank-MTAP-DepEd Math Challenge Division Finals (S.Y. ‘18 - ‘19)</li>
+    <li>1st Place, District Schools Press Conference - Science Writing Filipino (S.Y. ‘18 - ‘19)</li>
+    <li>5th Place, Division Schools Press Conference - Science Writing Filipino (S.Y. ‘18 - ‘19)</li>
+    <li>Qualifier, Regional Schools Press Conference - Science Writing Filipino (S.Y. ‘18 - ‘19)</li>
+    <li>1st Place, District Schools Press Conference - Science Writing Filipino (S.Y. ‘19 - ‘20)</li>
+    <li>1st Place, Division Schools Press Conference - Science Writing Filipino  (S.Y. ‘19 - ‘20)</li>
+    <li>Qualifier, Regional Schools Press Conference - Science Writing Filipino (S.Y. ‘19 - ‘20)</li>
+    <li>Participant, District Filipino Contest for Madulang Pagkukuwento (S.Y. ‘19 - ‘20)</li>
+    <li>1st Place, District Reading Month Competition - Super Speller  (S.Y. ‘19 - ‘20)</li>
+    <li>2nd Place, Division Brigada Reading Exhibits - Super Speller  (S.Y. ‘19 - ‘20)</li>
+    <li>Participant, De La Salle University - Interschool Sci-MATh Challenge - Forum (S.Y. ‘21-’22)</li>
+    <li>Champion, 14th National Campus Media Conference - Pambansang Pautakang Pampahayagan  (S.Y. ‘23 - ‘24)</li>
+    <li>2nd Runner-up, Ped Xing XV by UP Political Society - Collaborative Desktop Publishing  (S.Y. ‘23- ‘24)</li>
+    <li>2nd Place, 15th National Campus Media Conference - Pambansang Pautakang Pampahayagan (S.Y. ‘24- ‘25)</li>
+    <li>5th Place, 15th National Campus Media Conference - Editorial Writing Filipino (S.Y. ‘24- ‘25)</li>
+    <li>5th Place, 2024 Division Schools Press Conference - Collaborative Desktop Publishing - English (S.Y. ‘24- ‘25)</li>
+    <li>Champion, Ped Xing XVI by UP Political Society - Collaborative Desktop Publishing (S.Y. ‘24- ‘25)</li>
+  </ul>
+
+  <h2>AFFILIATIONS:</h2>
+  <ul>
+    <li>Supreme Pupil Government (S.Y. ‘17-’18)</li>
+    <li>Math Wizards Club (S.Y. ‘17-’18)</li>
+    <li>Supreme Pupil Government (S.Y. ‘18-’19)</li>
+    <li>Supreme Pupil Government (S.Y. ‘19-’20)</li>
+    <li>Supreme Pupil Government (S.Y. ‘20-’21)</li>
+    <li>Regional Federation of Supreme Pupil Government Officers - CALABARZON  (S.Y. ‘20-’21)</li>
+    <li>The Belfry - Student Publication of Tanauan South Central School (S.Y. ‘18-’19)</li>
+    <li>The Belfry - Student Publication of Tanauan South Central School (S.Y. ‘19-’20)</li>
+    <li>The Belfry - Student Publication of Tanauan South Central School (S.Y. ‘20-’21)</li>
+    <li>Lasallian Youth Ministry Office - Lasallian Youth Media Ministry (S.Y. ‘21-’22)</li>
+    <li>BULIK (S.Y. ‘23 - ‘24)</li>
+    <li>BULIK (S.Y. ‘24 - ‘25)</li>
+  </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-box" onclick="toggleCollapse(this)">
+        <h1>
+          Sarmiento, Sophia J.
+          <span class="toggle-icon">+</span>
+        </h1>
+                <div class="collapse-content">
+         <div class="collapse-inner">
+  <!-- 1. IMAGE FIRST -->
+  <img src="indivpic.png" alt="IS President">
+
+  <!-- 2. CREDENTIALS BELOW -->
+  <h2>LEADERSHIP CREDENTIALS:</h2>
+  <ul>
+    <li>Grade 5 Class Officer</li>
+    <li>Grade 7 CAPSTONE Co-Leader</li>
+    <li>Grade 8 CAPSTONE Co-Leader</li>
+    <li>Grade 9 CAPSTONE Leader</li>
+    <li>Grade 10 CAPSTONE Leader</li>
+    <li>Grade 10 Class President</li>
+    <li>Project Liaison, ENVIRO-TECH in partnership with Barangay Quezon Sangguniang Barangay & Sangguniang Kabataan</li>
+    <li>Proponent / Core Organizer, Relief Operations for Barangay Quezon Local Tailors</li>
+    <li>Student Nominator, TTEC Foundation Grant – Cumba-Quezon Elementary School</li>
+    <li>Student Volunteer, TTEC Foundation Turnover Ceremony – San Fernando, Pampanga</li>
+    <li>Youth Volunteer, Outreach Visit to Home for the Aged – Tanauan City, Batangas</li>
+    <li>Delegate, Social Innovation Masterclass</li>
+    <li>Delegate, Social Innovation Masterclass – Human-Centered Design</li>
+    <li>Delegate, Design Thinking Workshop for Grade 9–11 CAPSTONE Leaders</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>ACADEMIC CREDENTIALS:</h2>
+  <ul>
+    <li>Junior Kinder - 2nd Honor</li>
+    <li>Senior Kinder - 1st Honor</li>
+    <li>Grade 1 - 1st Honor</li>
+    <li>Grade 2 - 1st Honor</li>
+    <li>Grade 3 - 1st Honor</li>
+    <li>Grade 4 - 1st Honor</li>
+    <li>Grade 5 With Honors</li>
+    <li>Grade 6 With Honors</li>
+    <li>Grade 7 With High Honors</li>
+    <li>Grade 8 With Highest Honors</li>
+    <li>Grade 9 With Highest Honors</li>
+    <li>Grade 10 With High Honors</li>
+    <li>Spelling Bee Gold Medalist (S.Y. ’15-’16)</li>
+    <li>Best in Math (S.Y. ’14-’15)</li>
+    <li>Best in Science (S.Y. ’14-’15)</li>
+    <li>Best in Science (S.Y. ‘17-‘18)</li>
+    <li>A1 Child Section Representative (S.Y. ’14-’15)</li>
+    <li>MTAP School Representative (S.Y. ’15-’16)</li>
+    <li>MTAP School Representative (S.Y. ’17-’18)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>ORGANIZATIONS:</h2>
+  <ul>
+    <li>LCC Journalism - Sports Writing (S.Y. ’18-’19)</li>
+    <li>LCC Journalism - News Writing (S.Y. ’19-’20)</li>
+    <li>LCC Blazing Hawks Volleyball Varsity (S.Y. ’19-’20)</li>
+    <li>Volleyball Club (S.Y. ’23-’24)</li>
+  </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ <script>
+  function toggleCollapse(box) {
+    const content = box.querySelector('.collapse-content');
+    const icon = box.querySelector('.toggle-icon');
+    const isActive = content.classList.contains('active');
+
+    // Collapse all others
+    document.querySelectorAll('.collapse-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.text-box').forEach(b => {
+      b.classList.remove('open');
+      b.classList.add('collapsed'); // Mark as collapsed by default
+      b.querySelector('.toggle-icon').textContent = '+';
+    });
+
+    // Toggle current
+    if (!isActive) {
+      content.classList.add('active');
+      box.classList.add('open');
+      box.classList.remove('collapsed'); // Remove hover class when open
+      icon.textContent = '−';
+    }
+  }
+</script>
+</body>
+</html>
